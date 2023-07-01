@@ -35,9 +35,21 @@ Route::get('/test-database', function () {
         return "Database connection failed: " . $e->getMessage();
     }
 });
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['cek_login:admin']], function () {
+        Route::resource('admin', AdminController::class);
+    });
+    Route::group(['middleware' => ['cek_login:editor']], function () {
+        Route::resource('editor', AdminController::class);
+    });
+});
+
 // AUTH
 Route::post('/signup', [userAuth::class, 'SignUp']);
 Route::post('/signin', [userAuth::class, 'SignIn']);
+Route::post('/login', [userAuth::class, 'login']);
+Route::get('/logout', [userAuth::class, 'logout']);
 
 // PASIEN
 Route::post('/addpasien', [PasienController::class, 'create']);

@@ -18,8 +18,8 @@ class penyakit extends Model
         'NAMA',
     ];
 
-    public function pasien()
+    public function riwayat_penyakit()
     {
-        return $this->hasMany(pasien::class, 'ID_PENYAKIT', 'ID_PENYAKIT');
+        return $this->hasMany(riwayat_penyakit::class, 'ID_PENYAKIT', 'ID_PENYAKIT');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,12 +16,11 @@ class userAuth extends Controller
     public function SignUp(Request $request){
         try {
             $validatedData = $request->validate([
-                'nama' => 'required|max:50',
+                'nama' => 'required|max:30',
                 'username' => 'required|max:30|unique:users',
-                'email' => 'required|email:dns|unique:users',
-                'no_telp' => 'required',
+                'email' => 'required|unique:users',
                 'password' => 'required|min:8',
-                'confirm-password' => 'required|min:8|required_with:password|same:password'
+                //'confirm-password' => 'required|min:8|required_with:password|same:password'
             ]);
             $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -30,7 +31,6 @@ class userAuth extends Controller
                 "NAMA" => $validatedData['nama'],
                 "USERNAME" => $validatedData['username'],
                 "EMAIL" => $validatedData['email'],
-                "NO_TELP" => $validatedData['no_telp'],
                 "PASSWORD" =>  $validatedData['password'],
                 "TIPE_USER" => "bidan"
             ]);
@@ -44,10 +44,10 @@ class userAuth extends Controller
 
     public function SignIn(Request $request){
         $credentials = $request->validate([
-            'email' => ['required', 'email:dns'],
+            'username' => ['required'],
             'password' => ['required']
         ]);
-        $user = User::where('EMAIL', $credentials['email'])->first();
+        $user = User::where('USERNAME', $credentials['username'])->first();
 
         if (!$user) {
             return response()->json(['message' => 'Belum terdaftar'], 300);
@@ -60,5 +60,14 @@ class userAuth extends Controller
         Auth::login($user);
         return response()->json(['message' => 'Berhasil masuk', 'data' => $user], 200);
         //return redirect('/');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json([
+            'success' => true,
+            'message' => 'Logout berhasil',
+        ]);
     }
 }

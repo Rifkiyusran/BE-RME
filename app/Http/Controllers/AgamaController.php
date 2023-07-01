@@ -13,20 +13,9 @@ class AgamaController extends Controller
         return response()->json(['message' => 'Data agama', 'data' => $services], 200);
     }
 
-    public function delete($id)
-    {
-        try{
-        $service = agama::FindOrFail($id);
-        $service->delete();
-        return response()->json(['message' => 'Data agama berhasil dihapus'], 200);
-        }catch (\Exception $e) {
-            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
-        }
-    }
-
     public function create(Request $request){
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:50', 'min:3'],
+            'nama' => ['required', 'max:30', 'min:3'],
         ]);
         $maxId = agama::max('ID_AGAMA');
         $nextId = $maxId + 1;
@@ -46,5 +35,16 @@ class AgamaController extends Controller
                     "NAMA" => $validatedData['nama'],
                 ]);
         return response()->json(['message' => 'Berhasil merubah data agama', 'data' => $services], 200);
+    }
+
+    public function delete($id)
+    {
+        try{
+        $service = agama::Find('ID_AGAMA', $id);
+        $service->delete();
+        return response()->json(['message' => 'Data agama berhasil dihapus'], 200);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+        }
     }
 }
