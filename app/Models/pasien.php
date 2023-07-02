@@ -10,8 +10,11 @@ class pasien extends Model
     use HasFactory;
 
     protected $primarykey = 'ID_PASIEN';
+    //protected $primarykey = 'ID_PASIEN';
+    //protected $guarded = ['id'];
     protected $table = 'pasien';
     public $timestamps = false;
+
 
     public $fillable = [
         'ID_PASIEN',
@@ -31,10 +34,22 @@ class pasien extends Model
         'NO_TELP',
         'PEKERJAAN',
         'JENIS_KELAMIN',
+        'NAMA_AYAH',
+        'NAMA_IBU',
         'TIPE_USER'
     ];
 
-    public function User()
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($pasien) {
+            // Hapus data keluarga terkait
+            $pasien->keluarga()->delete();
+        });
+    }
+
+    public function user()
     {
         return $this->belongsTo(User::class, 'ID_USER', 'ID_USER');
     }

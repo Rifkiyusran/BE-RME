@@ -26,7 +26,7 @@ class MetodeKbController extends Controller
 
     public function create(Request $request){
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:50', 'min:3'],
+            'nama' => ['required', 'max:30', 'min:3'],
         ]);
         $maxId = metode_kb::max('ID_METODE_KB');
         $nextId = $maxId + 1;
@@ -39,7 +39,7 @@ class MetodeKbController extends Controller
 
     public function edit(Request $request, $id){
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:50', 'min:3'],
+            'nama' => ['required', 'max:30', 'min:3'],
         ]);
         $services = metode_kb::where('ID_METODE_KB', $id)
                 ->update([

@@ -40,7 +40,7 @@ class PendidikanTerakhirController extends Controller
     }
     public function edit(Request $request, $id){
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:50', 'min:3'],
+            'nama' => ['required', 'max:50', 'min:1'],
         ]);
         $services = pendidikan_terakhir::where('ID_PENDIDIKAN_TERAKHIR', $id)
                 ->update([

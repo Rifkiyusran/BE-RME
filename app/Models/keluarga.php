@@ -13,6 +13,7 @@ class keluarga extends Model
     protected $primaryKey = 'ID_KELUARGA';
     public $timestamps = false;
 
+
     protected $fillable = [
         'ID_KELUARGA',
         'ID_PASIEN',
@@ -31,4 +32,14 @@ class keluarga extends Model
     {
         return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PASIEN');
     }
+
+    // public function agamaSuami()
+    // {
+    //     return $this->belongsTo(agama::class, 'AGAMA_SUAMI', 'id_agama');
+    // }
+
+    // public function pendidikanSuami()
+    // {
+    //     return $this->belongsTo(pendidikan_terakhir::class, 'PENDIDIKAN_SUAMI', 'id_pendidikan_terakhir');
+    // }
 }

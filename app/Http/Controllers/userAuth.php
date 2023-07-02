@@ -62,6 +62,25 @@ class userAuth extends Controller
         //return redirect('/');
     }
 
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->only('username', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+
+    //         if ($user->tipe_user === 'admin') {
+    //             // Logika setelah berhasil login sebagai admin
+    //             return response()->json(['message' => 'Login success as admin']);
+    //         } elseif ($user->tipe_user === 'bidan') {
+    //             // Logika setelah berhasil login sebagai bidan
+    //             return response()->json(['message' => 'Login success as bidan']);
+    //         }
+    //     }
+
+    //     return response()->json(['message' => 'Invalid credentials'], 401);
+    // }
+
     public function logout()
     {
         Auth::logout();
