@@ -41,13 +41,17 @@ class JenisPelayananController extends Controller
     }
 
     public function edit(Request $request, $id){
+        try{
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:24', 'min:3'],
+            'nama' => ['required', 'max:30', 'min:3'],
         ]);
         $services = jenis_pelayanan::where('ID_JENIS_PELAYANAN', $id)
                 ->update([
                 "NAMA" => $validatedData['nama'],
                 ]);
         return response()->json(['message' => 'Berhasil merubah pelayanan', 'data' => $services], 200);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+        }
     }
 }

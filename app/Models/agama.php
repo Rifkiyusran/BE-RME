@@ -10,7 +10,7 @@ class agama extends Model
     use HasFactory;
 
     protected $table = 'agama';
-    protected $primarykey = 'ID_AGAMA';
+    protected $primaryKey = 'ID_AGAMA';
     public $timestamps = false;
 
     protected $fillable = [
@@ -23,6 +23,9 @@ class agama extends Model
         return $this->hasMany(pasien::class, 'ID_AGAMA', 'ID_AGAMA');
     }
 
-
+    // public function keluarga()
+    // {
+    //     return $this->hasMany(keluarga::class, 'AGAMA_SUAMI', 'id_agama');
+    // }
 
 }
