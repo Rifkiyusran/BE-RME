@@ -42,6 +42,7 @@ Route::post('/signin', [userAuth::class, 'SignIn']);
 // PASIEN
 Route::post('/addpasien', [PasienController::class, 'create']);
 Route::get('/getpasien', [PasienController::class, 'index']);
+Route::get('/getpasien/{id}', [PasienController::class, 'show']);
 Route::put('/updatepasien/{id}', [PasienController::class, 'edit']);
 Route::delete('/deletepasien/{id}', [PasienController::class, 'delete']);
 
@@ -80,5 +81,3 @@ Route::post('/addpenyakit', [PenyakitController::class, 'create']);
 Route::get('/getpenyakit', [PenyakitController::class, 'index']);
 Route::put('/updatepenyakit/{id}', [PenyakitController::class, 'edit']);
 Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
-
-
