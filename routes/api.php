@@ -5,6 +5,8 @@ use App\Http\Controllers\JenisImunisasiController;
 use App\Http\Controllers\JenisPelayananController;
 use App\Http\Controllers\MetodeKbController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PelayananKB;
+use App\Http\Controllers\PelayananKbController;
 use App\Http\Controllers\PendidikanTerakhirController;
 use App\Http\Controllers\PenyakitController;
 use App\Http\Controllers\userAuth;
@@ -93,3 +95,7 @@ Route::post('/addpenyakit', [PenyakitController::class, 'create']);
 Route::get('/getpenyakit', [PenyakitController::class, 'index']);
 Route::put('/updatepenyakit/{id}', [PenyakitController::class, 'edit']);
 Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
+
+// DATA KESEHATAN PELAYANAN KB
+Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
+Route::post('postkesehatanKb/{id}', [PelayananKbController::class, 'store']);
