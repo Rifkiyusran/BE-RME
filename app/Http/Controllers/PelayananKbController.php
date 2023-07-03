@@ -17,7 +17,7 @@ class PelayananKbController extends Controller
         return response()->json($pelayanan_kb);
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request, pasien $id)
     {
         error_log($request);
         $request->validate([

@@ -104,4 +104,4 @@ Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
 
 // DATA KESEHATAN PELAYANAN KB
 Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
-Route::post('postkesehatanKb/{id}', [PelayananKbController::class, 'store']);
+Route::post('postkesehatanKb', [PelayananKbController::class, 'store']);

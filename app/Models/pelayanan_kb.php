@@ -15,6 +15,7 @@ class pelayanan_kb extends Model
 
     protected $fillable = [
         'ID_PELAYANAN_KB',
+        'ID_PASIEN',
         'ID_METODE_KB',
         'DIAGNOSA',
         'TINDAKAN',
