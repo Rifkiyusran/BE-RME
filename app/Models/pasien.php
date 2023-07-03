@@ -9,8 +9,8 @@ class pasien extends Model
 {
     use HasFactory;
 
-    protected $primarykey = 'ID_PASIEN';
-    //protected $primarykey = 'ID_PASIEN';
+    protected $primaryKey = 'ID_PASIEN';
+    //protected $primaryKey = 'ID_PASIEN';
     //protected $guarded = ['id'];
     protected $table = 'pasien';
     public $timestamps = false;

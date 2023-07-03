@@ -88,7 +88,7 @@ class PasienController extends Controller
             $keluargaData = keluarga::create([
                 "ID_KELUARGA" => $nextKeluargaId,
                 //$keluargaData['ID_PASIEN'] = $pasien->ID_PASIEN,
-                "ID_PASIEN" => $pasien->ID_PASIEN,
+                "ID_PASIEN" => $nextId,
                 "NAMA_SUAMI" => $keluargaData['nama_suami'],
                 "TEMPAT_LAHIR_SUAMI" => $keluargaData['tempat_lahir_suami'],
                 "TANGGAL_LAHIR_SUAMI" => $keluargaData['tanggal_lahir_suami'],
@@ -198,14 +198,11 @@ class PasienController extends Controller
     public function delete($pasien)
     {
         try {
-            $pasien = pasien::findOrFail($pasien);
-
+            $pasien = pasien::find($pasien);
             $pasien->delete();
-
             if ($pasien->keluarga) {
                 $pasien->keluarga->delete();
             }
-
             return response()->json(['message' => 'Data pasien dan data keluarga berhasil dihapus'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);

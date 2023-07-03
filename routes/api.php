@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgamaController;
+use App\Http\Controllers\BidanController;
 use App\Http\Controllers\JenisImunisasiController;
 use App\Http\Controllers\JenisPelayananController;
 use App\Http\Controllers\MetodeKbController;
@@ -47,9 +48,14 @@ Route::group(['middleware' => ['auth']], function () {
 
 // AUTH
 Route::post('/signup', [userAuth::class, 'SignUp']);
-Route::post('/signin', [userAuth::class, 'SignIn']);
-Route::post('/login', [userAuth::class, 'login']);
+Route::post('/signin', [userAuth::class, 'SignIn']); //login untuk admin dan bidan
+Route::post('/login', [userAuth::class, 'login']); // login untuk pasien
 Route::get('/logout', [userAuth::class, 'logout']);
+
+//BIDAN
+Route::post('/addbidan', [BidanController::class, 'signUpBidan']);
+Route::get('/getbidan', [BidanController::class, 'show']);
+Route::delete('/deletebidan/{id}', [BidanController::class, 'delete']);
 
 // PASIEN
 Route::post('/addpasien', [PasienController::class, 'create']);
