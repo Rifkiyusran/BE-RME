@@ -103,5 +103,6 @@ Route::put('/updatepenyakit/{id}', [PenyakitController::class, 'edit']);
 Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
 
 // DATA KESEHATAN PELAYANAN KB
+Route::get('getkesehatanKb', [PelayananKbController::class, 'index']);
 Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
 Route::post('postkesehatanKb', [PelayananKbController::class, 'store']);

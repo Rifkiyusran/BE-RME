@@ -7,31 +7,38 @@ use App\Models\pasien;
 use App\Models\pelayanan_kb;
 use Illuminate\Http\Request;
 
-
 class PelayananKbController extends Controller
 {
+
+    public function index(){
+        $pelayanan_kb = pelayanan_kb::with(['pasien', 'metode_kb'])->get();
+        return response()->json(['message' => 'List pelayanan kb', 'data' => $pelayanan_kb], 200);
+    }
+
+
     public function show($id)
     {
-        $pelayanan_kb = pelayanan_kb::where('ID_PASIEN', $id)->get();
-
+        $pelayanan_kb = pelayanan_kb::with('pasien', 'metode_kb')->where('ID_PELAYANAN_KB', $id)->get();
         return response()->json($pelayanan_kb);
     }
 
-    public function store(Request $request, pasien $id)
+    public function store(Request $request, pasien $pasien)
     {
-        error_log($request);
+        try{
+        //error_log($request);
         $request->validate([
-            'ID_METODE_KB' => 'required | exists:metode_kb,ID_METODE_KB',
+            'ID_METODE_KB' => 'required | exists:metode_kb,id_metode_kb',
+            'ID_PASIEN' => 'required | exists:pasien,id_pasien',
             'DIAGNOSA' => 'required|string',
             'TINDAKAN' => 'required|string',
-            'TANGGAL_DATANG ' => 'required|date',
+            //'TANGGAL_DATANG ' => 'required|date',
             'TANGGAL_KEMBALI' => 'required|date',
             'CATATAN' => 'nullable|string',
             'TEKANAN_DARAH' => 'required|string',
             'KELUHAN_PASIEN' => 'nullable|string',
             'TANGGAL_DILAYANI' => 'required|date',
-            'BERAT_BADAN' => 'required|string',
-            'TINGGI_BADAN' => 'required|string',
+            //'BERAT_BADAN' => 'required|string',
+            //'TINGGI_BADAN' => 'required|string',
         ]);
 
         // $pasien = pasien::find($id);
@@ -48,7 +55,7 @@ class PelayananKbController extends Controller
         $nextId = $maxId + 1;
         $pelayanan_kb = pelayanan_kb::create([
             'ID_PELAYANAN_KB' => $nextId,
-            'ID_PASIEN' => $id,
+            'ID_PASIEN' => $request->ID_PASIEN,
             'ID_METODE_KB' => $request->ID_METODE_KB,
             'DIAGNOSA' => $request->DIAGNOSA,
             'TINDAKAN' => $request->TINDAKAN,
@@ -61,9 +68,11 @@ class PelayananKbController extends Controller
             'BERAT_BADAN' => $request->BERAT_BADAN,
             'TINGGI_BADAN' => $request->TINGGI_BADAN,
         ]);
-
         // $pelayanan_kb->save();
 
         return response()->json(['message' => 'Data Pelayanan KB Berhasil Disimpan', 'data' => $pelayanan_kb], 200);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+        }
     }
 }

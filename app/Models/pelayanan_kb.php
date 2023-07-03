@@ -31,11 +31,11 @@ class pelayanan_kb extends Model
 
     public function metode_kb()
     {
-        return $this->belongsTo(metode_kb::class, 'ID_METODE_KB', 'ID_PELAYANAN_KB');
+        return $this->belongsTo(metode_kb::class, 'ID_METODE_KB', 'ID_METODE_KB');
     }
 
     public function pasien()
     {
-        return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PELAYANAN_KB');
+        return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PASIEN');
     }
 }

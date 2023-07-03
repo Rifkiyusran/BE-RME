@@ -61,7 +61,7 @@ class pasien extends Model
 
     public function jenis_pelayanan()
     {
-        return $this->belongsTo(jenis_pelayanan::class, 'ID_JENIS_PELAYANAN', 'ID_PASIEN');
+        return $this->belongsTo(jenis_pelayanan::class, 'ID_JENIS_PELAYANAN', 'ID_JENIS_PELAYANAN');
     }
 
     public function riwayat_penyakit()

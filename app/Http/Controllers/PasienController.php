@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class PasienController extends Controller
 {
     public function index(){
-        $pasien = pasien::with(['agama', 'pendidikan_terakhir', 'keluarga', 'User'])->get();
+        $pasien = pasien::with(['keluarga', 'agama', 'pendidikan_terakhir', 'jenis_pelayanan', 'User'])->get();
         return response()->json(['message' => 'List pasien', 'data' => $pasien], 200);
     }
 
@@ -33,7 +33,7 @@ class PasienController extends Controller
     public function create(Request $request, User $user){
         try{
         $validatedData = $request->validate([
-            'id_pendidikan_terakhir' => ['required', 'exists:pendidikan_terakhir,id_pendidikan_terakhir'],
+            //'id_pendidikan_terakhir' => ['required', 'exists:pendidikan_terakhir,id_pendidikan_terakhir'],
             'id_agama' => ['required', 'exists:agama,id_agama'],
             //'id_user' => ['required','exists:users,id_user'],
             //'id_penyakit' => ['required','exists:penyakit,id_penyakit'],
@@ -46,12 +46,12 @@ class PasienController extends Controller
             'alamat' => ['required', 'max:100'],
             'gol_darah' => ['required'],
             'no_nik' => 'required|max:16|unique:pasien',
-            'no_kk' => 'required|max:16|unique:pasien',
+            'no_kk' => 'required|max:16',
             'no_telp' => 'required',
             'pekerjaan' => ['required', 'max:100', 'min:3'],
-            'jenis_kelamin' => ['required'],
-            'nama_ayah' => ['required', 'max:50', 'min:3'],
-            'nama_ibu' => ['required', 'max:50', 'min:3'],
+            //'jenis_kelamin' => ['required'],
+            //'nama_ayah' => ['required', 'max:50', 'min:3'],
+            //'nama_ibu' => ['required', 'max:50', 'min:3'],
             //'tipe_pasien' => ['required'],
         ]);
 
