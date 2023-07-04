@@ -23,9 +23,9 @@ class agama extends Model
         return $this->hasMany(pasien::class, 'ID_AGAMA', 'ID_AGAMA');
     }
 
-    // public function keluarga()
-    // {
-    //     return $this->hasMany(keluarga::class, 'AGAMA_SUAMI', 'id_agama');
-    // }
+    public function keluarga()
+    {
+        return $this->hasMany(keluarga::class, 'AGAMA_SUAMI', 'ID_AGAMA');
+    }
 
 }

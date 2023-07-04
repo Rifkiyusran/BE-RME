@@ -33,13 +33,23 @@ class keluarga extends Model
         return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PASIEN');
     }
 
-    // public function agamaSuami()
+    // public function agama()
     // {
-    //     return $this->belongsTo(agama::class, 'AGAMA_SUAMI', 'id_agama');
+    //     return $this->belongsTo(agama::class, 'ID_AGAMA', 'ID_AGAMA');
     // }
 
-    // public function pendidikanSuami()
+    // public function pendidikan()
     // {
-    //     return $this->belongsTo(pendidikan_terakhir::class, 'PENDIDIKAN_SUAMI', 'id_pendidikan_terakhir');
+    //     return $this->belongsTo(pendidikan_terakhir::class, 'ID_PENDIDIKAN_TERAKHIR', 'ID_PENDIDIKAN_TERAKHIR');
     // }
+
+    public function agama_suami()
+    {
+        return $this->belongsTo(agama::class, 'AGAMA_SUAMI', 'ID_AGAMA');
+    }
+
+    public function pendidikan_suami()
+    {
+        return $this->belongsTo(pendidikan_terakhir::class, 'PENDIDIKAN_SUAMI', 'ID_PENDIDIKAN_TERAKHIR');
+    }
 }

@@ -83,7 +83,7 @@ class userAuth extends Controller
         $rm = $request->input('no_rm');
 
         // Cari pasien berdasarkan nomor NIK dan nomor RM
-        $pasien = Pasien::where('NO_NIK', $nik)
+        $pasien = pasien::where('NO_NIK', $nik)
                         ->where('NO_RM', $rm)
                         ->first();
 
@@ -93,7 +93,9 @@ class userAuth extends Controller
                 'message' => 'Login berhasil',
                 'nama lengkap' => $pasien->NAMA_LENGKAP,
                 'no nik' => $pasien->NO_NIK,
-                'no rm' => $pasien->NO_RM
+                'no rm' => $pasien->NO_RM,
+                // 'data' => TIPE_USER-> ['pasien'],
+                // "TIPE_USER" => "pasien"
             ], 200);
         } else {
             // Jika pasien tidak ditemukan

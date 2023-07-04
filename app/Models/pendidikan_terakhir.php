@@ -23,8 +23,8 @@ class pendidikan_terakhir extends Model
         return $this->hasMany(pasien::class, 'ID_PENDIDIKAN_TERAKHIR', 'ID_PENDIDIKAN_TERAKHIR');
     }
 
-    // public function keluarga()
-    // {
-    //     return $this->hasMany(keluarga::class, 'PENDIDIKAN_SUAMI', 'id_pendidikan_terakhir');
-    // }
+    public function keluarga()
+    {
+        return $this->hasMany(keluarga::class, 'PENDIDIKAN_SUAMI', 'ID_PENDIDIKAN_TERAKIR');
+    }
 }

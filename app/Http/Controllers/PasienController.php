@@ -22,12 +22,9 @@ class PasienController extends Controller
 
     public function show(pasien $pasien, $id)
     {
-        //error_log(pasien::find($id));
-        $pasien = pasien::where('ID_PASIEN', $id)->get();
-        //dd($pasien);
+        $pasien = pasien::with(['agama', 'pendidikan_terakhir', 'keluarga', 'User'])->where('ID_PASIEN', $id)->get();
         return response()->json([
-            'data' => $pasien
-            // 'data' => pasien::findORfail($id)
+            'data' => $pasien,
         ]);
     }
 
@@ -76,9 +73,9 @@ class PasienController extends Controller
                 "NO_KK" => $validatedData['no_kk'],
                 "NO_TELP" => $validatedData['no_telp'],
                 "PEKERJAAN" => $validatedData['pekerjaan'],
-                "JENIS_KELAMIN" => $validatedData['jenis_kelamin'],
-                "NAMA_AYAH" => $validatedData['nama_ayah'],
-                "NAMA_IBU" => $validatedData['nama_ibu'],
+                //"JENIS_KELAMIN" => $validatedData['jenis_kelamin'],
+                //"NAMA_AYAH" => $validatedData['nama_ayah'],
+                //"NAMA_IBU" => $validatedData['nama_ibu'],
             ]);
             //$pasien->save();
 
@@ -137,12 +134,12 @@ class PasienController extends Controller
                 'alamat' => ['required', 'max:100'],
                 'gol_darah' => ['required'],
                 'no_nik' => ['required', 'max:16', Rule::unique('pasien')->ignore($id, 'ID_PASIEN')],
-                'no_kk' => ['required', 'max:16', Rule::unique('pasien')->ignore($id, 'ID_PASIEN')],
+                'no_kk' => ['required', 'max:16'],
                 'no_telp' => ['required'],
                 'pekerjaan' => ['required', 'max:100', 'min:3'],
-                'jenis_kelamin' => ['required'],
-                'nama_ayah' => ['required', 'max:50', 'min:3'],
-                'nama_ibu' => ['required', 'max:50', 'min:3'],
+                //'jenis_kelamin' => ['required'],
+                //'nama_ayah' => ['required', 'max:50', 'min:3'],
+                //'nama_ibu' => ['required', 'max:50', 'min:3'],
             ]);
 
             // Update data pasien
@@ -160,9 +157,9 @@ class PasienController extends Controller
                 "NO_KK" => $validatedData['no_kk'],
                 "NO_TELP" => $validatedData['no_telp'],
                 "PEKERJAAN" => $validatedData['pekerjaan'],
-                "JENIS_KELAMIN" => $validatedData['jenis_kelamin'],
-                "NAMA_AYAH" => $validatedData['nama_ayah'],
-                "NAMA_IBU" => $validatedData['nama_ibu'],
+                //"JENIS_KELAMIN" => $validatedData['jenis_kelamin'],
+                //"NAMA_AYAH" => $validatedData['nama_ayah'],
+                //"NAMA_IBU" => $validatedData['nama_ibu'],
             ]);
 
             if ($request->has('keluarga')) {

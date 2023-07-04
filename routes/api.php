@@ -5,7 +5,9 @@ use App\Http\Controllers\BidanController;
 use App\Http\Controllers\JenisImunisasiController;
 use App\Http\Controllers\JenisPelayananController;
 use App\Http\Controllers\MetodeKbController;
+use App\Http\Controllers\PasienAnakController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PelayananImunisasiController;
 use App\Http\Controllers\PelayananKB;
 use App\Http\Controllers\PelayananKbController;
 use App\Http\Controllers\PendidikanTerakhirController;
@@ -66,6 +68,14 @@ Route::get('/getpasien/{id}', [PasienController::class, 'show']);
 Route::put('/updatepasien/{id}', [PasienController::class, 'edit']);
 Route::delete('/deletepasien/{id}', [PasienController::class, 'delete']);
 
+//PASIEN ANAK
+Route::post('/addpasienAnak', [PasienAnakController::class, 'create']);
+Route::get('/getpasienAnak', [PasienAnakController::class, 'index']);
+//Route::get('/getpasienAnak/{id}', [PasienAnakController::class, 'show']);
+Route::get('/getpasienAnak/{tipe}', [PasienAnakController::class, 'show']);
+Route::put('/updatepasienAnak/{id}', [PasienAnakController::class, 'edit']);
+Route::delete('/deletepasienAnak/{id}', [PasienAnakController::class, 'delete']);
+
 // AGAMA
 Route::post('/addagama', [AgamaController::class, 'create']);
 Route::get('/getagama', [AgamaController::class, 'index']);
@@ -105,4 +115,9 @@ Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
 // DATA KESEHATAN PELAYANAN KB
 Route::get('getkesehatanKb', [PelayananKbController::class, 'index']);
 Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
-Route::post('postkesehatanKb', [PelayananKbController::class, 'store']);
+Route::post('pasien/{id_pasien}/pelayanan_kb', [PelayananKbController::class, 'store']);
+
+// DATA KESEHATAN PELAYANAN Imunisasi
+Route::get('getkesehatanImunisasi', [PelayananImunisasiController::class, 'index']);
+Route::get('getkesehatanImunisasi/{id}', [PelayananImunisasiController::class, 'show']);
+Route::post('pasien/{id_pasien}/pelayanan_imunisasi', [PelayananImunisasiController::class, 'store']);

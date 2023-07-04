@@ -36,7 +36,7 @@ class pasien extends Model
         'JENIS_KELAMIN',
         'NAMA_AYAH',
         'NAMA_IBU',
-        'TIPE_USER'
+        'TIPE_PASIEN'
     ];
 
     public static function boot()

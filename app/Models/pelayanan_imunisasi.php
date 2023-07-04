@@ -15,8 +15,8 @@ class pelayanan_imunisasi extends Model
 
     protected $fillable = [
         'ID_PELAYANAN_IMUNISASI',
+        'ID_PASIEN',
         'ID_JENIS_IMUNISASI',
-        'NO_RM',
         'TANGGAL_PEMBERIAN',
         'TEKANAN_DARAH',
         'KELUHAN_PASIEN',
@@ -28,12 +28,12 @@ class pelayanan_imunisasi extends Model
 
     public function jenis_imunisasi()
     {
-        return $this->belongsTo(jenis_imunisasi::class, 'ID_JENIS_IMUNISASI', 'ID_PELAYANAN_IMUNISASI');
+        return $this->belongsTo(jenis_imunisasi::class, 'ID_JENIS_IMUNISASI', 'ID_JENIS_IMUNISASI');
     }
 
     public function pasien()
     {
-        return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PELAYANAN_IMUNISASI');
+        return $this->belongsTo(pasien::class, 'ID_PASIEN', 'ID_PASIEN');
     }
 
 
