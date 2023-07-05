@@ -19,6 +19,9 @@ class BidanController extends Controller
                 'username' => 'required|max:30|unique:users',
                 'email' => 'required|unique:users',
                 'password' => 'required|min:8',
+                'nip' => 'required|min:18|max:18|unique:users',
+                'alamat' => 'required|max:100',
+                'no_telp' => 'required|max:13'
                 //'confirm-password' => 'required|min:8|required_with:password|same:password'
             ]);
             $validatedData['password'] = Hash::make($validatedData['password']);
@@ -31,6 +34,9 @@ class BidanController extends Controller
                 "USERNAME" => $validatedData['username'],
                 "EMAIL" => $validatedData['email'],
                 "PASSWORD" =>  $validatedData['password'],
+                "NIP" =>  $validatedData['nip'],
+                "ALAMAT" =>  $validatedData['alamat'],
+                "NO_TELP" =>  $validatedData['no_telp'],
                 "TIPE_USER" => "bidan"
             ]);
 
@@ -40,7 +46,7 @@ class BidanController extends Controller
         }
     }
 
-    public function show()
+    public function getBidan()
     {
         try {
             // Ambil semua akun dengan tipe user 'bidan'

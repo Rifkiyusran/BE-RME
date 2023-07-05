@@ -43,6 +43,29 @@ class PasienAnakController extends Controller
         }
     }
 
+    public function showbyID($tipe, $id)
+    {
+        // $pasien = pasien::with(['agama', 'pendidikan_terakhir', 'jenis_pelayanan', 'keluarga.agama_suami', 'keluarga.pendidikan_suami', 'User'])->where('ID_PASIEN', $id)->get();
+        // return response()->json([
+        //     'data' => $pasien,
+        // ]);
+        {
+            if ($tipe === 'anak') {
+                $pasien = pasien::with('agama', 'pendidikan_terakhir', 'jenis_pelayanan')->where('TIPE_PASIEN', 'anak')->find($id);
+            } elseif ($tipe === 'ibu') {
+                $pasien = pasien::with('agama', 'pendidikan_terakhir', 'jenis_pelayanan', 'keluarga.agama_suami', 'keluarga.pendidikan_suami')->where('TIPE_PASIEN', 'ibu')->find($id);
+            } else {
+                return response()->json(['message' => 'Tipe pasien tidak valid'], 400);
+            }
+
+            if (!$pasien) {
+                return response()->json(['message' => 'Pasien tidak ditemukan'], 404);
+            }
+
+            return response()->json(['data' => $pasien], 200);
+        }
+    }
+
 public function create(Request $request, User $user)
 {
     try {
@@ -298,6 +321,26 @@ public function edit(Request $request, User $user, $id)
         try {
             $pasien = pasien::find($pasien);
             $pasien->delete();
+            if ($pasien->keluarga) {
+                $pasien->keluarga->delete();
+            }
+            return response()->json(['message' => 'Data pasien berhasil dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function deletepelayanan($pasien)
+    {
+        try {
+            $pasien = pasien::find($pasien);
+            $pasien->delete();
+
+                    // Hapus data pelayanan KB terkait pasien
+        $pasien->pelayanan_kb()->delete();
+
+        // Hapus data imunisasi terkait pasien
+        $pasien->imunisasi()->delete();
             if ($pasien->keluarga) {
                 $pasien->keluarga->delete();
             }

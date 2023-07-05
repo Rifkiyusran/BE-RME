@@ -23,6 +23,8 @@ class User extends Authenticatable
         'NO_TELP',
         'EMAIL',
         'PASSWORD',
+        'NIP',
+        'ALAMAT',
         'TIPE_USER',
     ];
 

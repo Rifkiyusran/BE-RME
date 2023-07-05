@@ -42,7 +42,7 @@ class PelayananKbController extends Controller
         $validatedData = $request->validate([
             'id_metode_kb' => 'required | exists:metode_kb,id_metode_kb',
             //'ID_PASIEN' => 'required | exists:pasien,id_pasien',
-            'diagnosa' => 'required|max:10',
+            'diagnosa' => 'required|max:100',
             'tindakan' => 'required|max:50',
             //'tanggal_datang ' => ['required', 'date'],
             'tanggal_kembali' => 'required|date',
@@ -78,4 +78,16 @@ class PelayananKbController extends Controller
             return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
         }
     }
+
+    public function delete($id_pasien, $id_pelayanan_kb)
+{
+    try {
+        $pelayanan_kb = pelayanan_kb::where('ID_PASIEN', $id_pasien)->find($id_pelayanan_kb);
+        $pelayanan_kb->delete();
+
+        return response()->json(['message' => 'Data Pelayanan KB berhasil dihapus'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error: ' . $e->getMessage()], 500);
+    }
+}
 }

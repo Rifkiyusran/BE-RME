@@ -58,23 +58,26 @@ Route::get('/logout', [userAuth::class, 'logout']);
 
 //BIDAN
 Route::post('/addbidan', [BidanController::class, 'signUpBidan']);
-Route::get('/getbidan', [BidanController::class, 'show']);
+Route::get('/getbidan', [BidanController::class, 'getBidan']);
 Route::delete('/deletebidan/{id}', [BidanController::class, 'delete']);
 
 // PASIEN
 Route::post('/addpasien', [PasienController::class, 'create']);
 Route::get('/getpasien', [PasienController::class, 'index']);
-Route::get('/getpasien/{id}', [PasienController::class, 'show']);
+Route::get('/getpasien/{tipe}', [PasienController::class, 'show']);
+Route::get('/getpasien/{tipe}/{id}', [PasienController::class, 'showByID']);
 Route::put('/updatepasien/{id}', [PasienController::class, 'edit']);
 Route::delete('/deletepasien/{id}', [PasienController::class, 'delete']);
+//Route::delete('/deletepasien/tes/{id}', [PasienController::class, 'deletepelayanan']);
 
 //PASIEN ANAK
-Route::post('/addpasienAnak', [PasienAnakController::class, 'create']);
-Route::get('/getpasienAnak', [PasienAnakController::class, 'index']);
-//Route::get('/getpasienAnak/{id}', [PasienAnakController::class, 'show']);
-Route::get('/getpasienAnak/{tipe}', [PasienAnakController::class, 'show']);
-Route::put('/updatepasienAnak/{id}', [PasienAnakController::class, 'edit']);
-Route::delete('/deletepasienAnak/{id}', [PasienAnakController::class, 'delete']);
+// Route::post('/addpasienAnak', [PasienAnakController::class, 'create']);
+// Route::get('/getpasienAnak', [PasienAnakController::class, 'index']);
+// //Route::get('/getpasienAnak/{id}', [PasienAnakController::class, 'show']);
+// Route::get('/getpasienAnak/{tipe}', [PasienAnakController::class, 'show']);
+// Route::get('/getpasienAnak/{tipe}/{id}', [PasienAnakController::class, 'showByID']);
+// Route::put('/updatepasienAnak/{id}', [PasienAnakController::class, 'edit']);
+// Route::delete('/deletepasienAnak/{id}', [PasienAnakController::class, 'delete']);
 
 // AGAMA
 Route::post('/addagama', [AgamaController::class, 'create']);
@@ -116,6 +119,7 @@ Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
 Route::get('getkesehatanKb', [PelayananKbController::class, 'index']);
 Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
 Route::post('pasien/{id_pasien}/pelayanan_kb', [PelayananKbController::class, 'store']);
+Route::delete('pasien/{id_pasien}/pelayanan_kb/{id_pelayanan_kb}', [PelayananKbController::class, 'delete']);
 
 // DATA KESEHATAN PELAYANAN Imunisasi
 Route::get('getkesehatanImunisasi', [PelayananImunisasiController::class, 'index']);

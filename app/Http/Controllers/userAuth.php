@@ -91,9 +91,11 @@ class userAuth extends Controller
             // Tampilkan nama, nomor NIK, dan nomor RM pasien
             return response()->json([
                 'message' => 'Login berhasil',
+                'id_pasien' => $pasien->ID_PASIEN,
                 'nama lengkap' => $pasien->NAMA_LENGKAP,
                 'no nik' => $pasien->NO_NIK,
                 'no rm' => $pasien->NO_RM,
+                'tipe_pasien' => $pasien->TIPE_PASIEN
                 // 'data' => TIPE_USER-> ['pasien'],
                 // "TIPE_USER" => "pasien"
             ], 200);

@@ -34,6 +34,8 @@ class pasien extends Model
         'NO_TELP',
         'PEKERJAAN',
         'JENIS_KELAMIN',
+        'RIWAYAT_PENYAKIT',
+        'RIWAYAT_ALERGI',
         'NAMA_AYAH',
         'NAMA_IBU',
         'TIPE_PASIEN'
