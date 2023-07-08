@@ -17,7 +17,7 @@ class PelayananKbController extends Controller
     }
 
 
-    public function show($id)
+    public function showKb($id)
     {
         try {
             // Cari pasien berdasarkan ID
@@ -36,7 +36,7 @@ class PelayananKbController extends Controller
         // return response()->json($pelayanan_kb);
     }
 
-    public function store(Request $request, $id_pasien)
+    public function createKb(Request $request, $id_pasien)
     {
         try{
         $validatedData = $request->validate([

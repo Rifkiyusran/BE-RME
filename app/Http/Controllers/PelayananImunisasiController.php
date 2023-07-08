@@ -14,7 +14,7 @@ class PelayananImunisasiController extends Controller
         return response()->json(['message' => 'List pelayanan kb', 'data' => $pelayanan_kb], 200);
     }
 
-    public function show($id)
+    public function showImunisasi($id)
     {
         try {
             // Cari pasien berdasarkan ID
@@ -33,7 +33,7 @@ class PelayananImunisasiController extends Controller
         // return response()->json($pelayanan_kb);
     }
 
-    public function store(Request $request, $id_pasien)
+    public function createImunisasi(Request $request, $id_pasien)
     {
         try{
         $request->validate([

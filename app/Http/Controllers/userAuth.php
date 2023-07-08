@@ -103,22 +103,6 @@ class userAuth extends Controller
             // Jika pasien tidak ditemukan
             return response()->json(['message' => 'Login gagal'], 401);
         }
-
-        // // Jika pasien ditemukan
-        // if ($pasien) {
-        //     // Ambil data keluarga pasien
-        //     $keluarga = keluarga::where('ID_PASIEN', $pasien->ID_PASIEN)->get();
-
-        //     // Tampilkan data pasien dan data keluarga
-        //     return response()->json([
-        //         'message' => 'Login berhasil',
-        //         'pasien' => $pasien,
-        //         'keluarga' => $keluarga
-        //     ], 200);
-        // } else {
-        //     // Jika pasien tidak ditemukan
-        //     return response()->json(['message' => 'Login gagal'], 401);
-        // }
     }
 
     public function logout()

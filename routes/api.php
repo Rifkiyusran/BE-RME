@@ -117,11 +117,11 @@ Route::delete('/deletepenyakit/{id}', [PenyakitController::class, 'delete']);
 
 // DATA KESEHATAN PELAYANAN KB
 Route::get('getkesehatanKb', [PelayananKbController::class, 'index']);
-Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'show']);
-Route::post('pasien/{id_pasien}/pelayanan_kb', [PelayananKbController::class, 'store']);
+Route::get('getkesehatanKb/{id}', [PelayananKbController::class, 'showKb']);
+Route::post('pasien/{id_pasien}/pelayanan_kb', [PelayananKbController::class, 'createKb']);
 Route::delete('pasien/{id_pasien}/pelayanan_kb/{id_pelayanan_kb}', [PelayananKbController::class, 'delete']);
 
 // DATA KESEHATAN PELAYANAN Imunisasi
 Route::get('getkesehatanImunisasi', [PelayananImunisasiController::class, 'index']);
-Route::get('getkesehatanImunisasi/{id}', [PelayananImunisasiController::class, 'show']);
-Route::post('pasien/{id_pasien}/pelayanan_imunisasi', [PelayananImunisasiController::class, 'store']);
+Route::get('getkesehatanImunisasi/{id}', [PelayananImunisasiController::class, 'showImunisasi']);
+Route::post('pasien/{id_pasien}/pelayanan_imunisasi', [PelayananImunisasiController::class, 'createImunisasi']);
